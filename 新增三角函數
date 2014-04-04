@@ -1,0 +1,111 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class calculater extends JFrame {
+
+	double firstNum;
+	double secondNum;
+	double result = 0;
+
+	JTextField screem = new JTextField("first");
+	JTextField screem2 = new JTextField("second");
+	JButton plus = new JButton("+");
+	JButton minus = new JButton("-");
+	JButton time = new JButton("x");
+	JButton devide = new JButton("/");
+	JButton equal = new JButton("=");
+
+	JButton sin = new JButton("sin");
+	JButton cos = new JButton("cos");
+	JButton tan = new JButton("tan");
+
+	public static void main(String[] args) {
+		calculater cal = new calculater();
+		cal.setSize(400, 400);
+		cal.setTitle("calculater");
+		cal.setLocationRelativeTo(null);
+		cal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cal.setVisible(true);
+	}
+
+	public calculater() {
+
+		JPanel panel1 = new JPanel(new GridLayout(3, 3));
+
+		panel1.add(plus);
+		panel1.add(minus);
+		panel1.add(time);
+		panel1.add(devide);
+		panel1.add(equal);
+		panel1.add(sin);
+		panel1.add(cos);
+		panel1.add(tan);
+
+		plus.addActionListener(new ButtonListener());
+		minus.addActionListener(new ButtonListener());
+		time.addActionListener(new ButtonListener());
+		devide.addActionListener(new ButtonListener());
+		equal.addActionListener(new ButtonListener());
+		sin.addActionListener(new ButtonListener());
+		cos.addActionListener(new ButtonListener());
+		tan.addActionListener(new ButtonListener());
+
+		JPanel panel2 = new JPanel((new GridLayout(4, 0)));
+		panel2.add(screem, BorderLayout.EAST);
+		panel2.add(screem2, BorderLayout.SOUTH);
+
+		add(panel1, BorderLayout.SOUTH);
+		add(panel2, BorderLayout.CENTER);
+
+	}
+
+	class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == plus) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum + secondNum;
+
+			} else if (e.getSource() == minus) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum - secondNum;
+			} else if (e.getSource() == time) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum * secondNum;
+			} else if (e.getSource() == devide) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum / secondNum;
+			} else if (e.getSource() == equal) {
+				screem.setText(String.valueOf(result));
+			} else if (e.getSource() == sin) {
+				result = Math.sin(Math.toRadians(Double.parseDouble(screem
+						.getText())));
+			}
+
+			else if (e.getSource() == cos) {
+				result = Math.cos(Math.toRadians(Double.parseDouble(screem
+						.getText())));
+			}
+
+			else if (e.getSource() == tan) {
+				result = Math.tan(Math.toRadians(Double.parseDouble(screem
+						.getText())));
+			}
+
+		}
+	}
+
+}
