@@ -1,0 +1,67 @@
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class calculater extends JFrame
+{
+	
+	JLabel screem = new JLabel("0");
+	JButton plus = new JButton("+");
+	JButton minus = new JButton("-");
+	JButton time = new JButton("X");
+	JButton devide = new JButton("/");
+	JButton equal = new JButton("=");
+	JButton one = new JButton("1");
+	JButton two = new JButton("2");
+	JButton three = new JButton("3");
+	JButton four = new JButton("4");
+	JButton five = new JButton("5");
+	JButton six = new JButton("6");
+	JButton seven = new JButton("7");
+	JButton eight = new JButton("8");
+	JButton nine = new JButton("9");
+	JButton zero = new JButton("0");
+	JButton dot = new JButton(".");
+	
+	public static void main(String[] args)
+	{
+		calculater cal = new calculater();
+		cal.setSize(400,400);
+		cal.setTitle("calculater");
+		cal.setLocationRelativeTo(null);
+		cal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cal.setVisible(true);
+	}
+	
+	public calculater()
+	{
+		
+		JPanel panel1 = new JPanel(new GridLayout(4,4));
+		panel1.add(one);
+		panel1.add(two);
+		panel1.add(three);
+		panel1.add(plus);
+		panel1.add(four);
+		panel1.add(five);
+		panel1.add(six);
+		panel1.add(minus);
+		panel1.add(seven);
+		panel1.add(eight);
+		panel1.add(nine);
+		panel1.add(time);
+		panel1.add(dot);
+		panel1.add(zero);
+		panel1.add(equal);
+		panel1.add(devide);
+		
+		JPanel panel2 = new JPanel((new GridLayout(4,0)));
+		panel2.add(screem,BorderLayout.EAST);
+		
+		add(panel1,BorderLayout.SOUTH);
+		add(panel2,BorderLayout.CENTER);
+		
+	}
+	
+}
+
