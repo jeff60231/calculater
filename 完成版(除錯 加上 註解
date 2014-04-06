@@ -1,0 +1,179 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+
+public class calculater extends JFrame {
+
+	double firstNum;//declare variable
+	double secondNum;
+	double result = 0;
+
+	JTextField screem = new JTextField("first number");//create components
+	JTextField screem2 = new JTextField("second number");
+	JTextField screem3 = new JTextField("answer");
+	
+	JButton plus = new JButton("+");
+	JButton minus = new JButton("-");
+	JButton time = new JButton("x");
+	JButton devide = new JButton("/");
+	JButton equal = new JButton("=");
+
+	JButton sin = new JButton("sin");
+	JButton cos = new JButton("cos");
+	JButton tan = new JButton("tan");
+	JButton squr = new JButton("squr");
+
+	public static void main(String[] args) {//main method
+
+		password passFrame = new password();
+		passFrame.setSize(400, 400);
+		passFrame.setTitle("Please enter password");
+		passFrame.setLocationRelativeTo(null);
+		passFrame.setVisible(true);
+
+	}
+
+	public calculater() {
+
+		JPanel panel1 = new JPanel(new GridLayout(2, 4));
+
+		panel1.add(plus);//add buttons to panel1
+		panel1.add(minus);
+		panel1.add(time);
+		panel1.add(devide);
+		panel1.add(equal);
+		panel1.add(sin);
+		panel1.add(cos);
+		panel1.add(tan);
+		panel1.add(squr);
+
+		plus.addActionListener(new ButtonListener());//register buttonListener
+		minus.addActionListener(new ButtonListener());
+		time.addActionListener(new ButtonListener());
+		devide.addActionListener(new ButtonListener());
+		equal.addActionListener(new ButtonListener());
+		sin.addActionListener(new ButtonListener());
+		cos.addActionListener(new ButtonListener());
+		tan.addActionListener(new ButtonListener());
+		squr.addActionListener(new ButtonListener());
+		
+		JPanel panel2 = new JPanel((new GridLayout(3, 0)));
+		panel2.add(screem, BorderLayout.EAST);//add text fields
+		panel2.add(screem2, BorderLayout.SOUTH);
+		panel2.add(screem3);
+
+		add(panel1, BorderLayout.SOUTH);
+		add(panel2, BorderLayout.CENTER);
+
+	}
+
+	class ButtonListener implements ActionListener {//event listener
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == plus) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum + secondNum;
+
+			} else if (e.getSource() == minus) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum - secondNum;
+			} else if (e.getSource() == time) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum * secondNum;
+			} else if (e.getSource() == devide) {
+				firstNum = Double.parseDouble(screem.getText());
+
+				secondNum = Double.parseDouble(screem2.getText());
+
+				result = firstNum / secondNum;
+			} else if (e.getSource() == equal) {
+				screem3.setText(String.valueOf(result));
+			} else if (e.getSource() == sin) {
+				result = Math.sin(Math.toRadians(Double.parseDouble(screem
+						.getText())));
+			}
+
+			else if (e.getSource() == cos) {
+				result = Math.cos(Math.toRadians(Double.parseDouble(screem
+						.getText())));
+			}
+
+			else if (e.getSource() == tan) {
+				result = Math.tan(Math.toRadians(Double.parseDouble(screem
+						.getText())));
+			}
+			
+			else if (e.getSource() == squr) {
+				result = Math.sqrt(Double.parseDouble(screem
+						.getText()));
+			}
+
+
+		}
+	}
+
+}
+
+class password extends JFrame {//class about the password frame
+
+	JPasswordField passField = new JPasswordField(4);
+	JButton enter = new JButton("Enter");
+
+	char[] passCorrect = { '0', '0', '0', '0' };
+
+	
+
+	password() {
+
+		JPanel passPanel = new JPanel(new GridLayout(2,1 ));
+
+		passPanel.add(passField);
+		passPanel.add(enter);
+
+		enter.addActionListener(new ButtonListener());
+
+		add(passPanel, BorderLayout.CENTER);
+
+	}
+
+	void judgePass() {//judge the password
+		char[] pass = passField.getPassword();
+		if (Arrays.equals(passCorrect, pass)) {
+
+			this.setVisible(false);
+
+			calculater cal = new calculater();
+			cal.setSize(400, 400);
+			cal.setTitle("calculater");
+			cal.setLocationRelativeTo(null);
+			cal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			cal.setVisible(true);
+
+		} else {
+
+			System.out.println(passField.getPassword());
+
+		}
+	}
+
+	class ButtonListener implements ActionListener {//event listener
+
+		public void actionPerformed(ActionEvent e) {
+
+			judgePass();
+
+		}
+
+	}
+
+}
