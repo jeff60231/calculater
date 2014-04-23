@@ -5,17 +5,17 @@ import java.util.*;
 
 public class calculater extends JFrame {
 
-	double firstNum = 0;//declare variable
+	double firstNum = 0;// declare variable
 	double secondNum = 0;
 	double temp = 0;
 	double result = 0;
 	int statement = 0;
 	int condition = 0;
 	int secondEnter = 0;
+	int special = 0;
 
-	JTextField screem = new JTextField("first number");//create components
-	
-	
+	JTextField screem = new JTextField("first number");// create components
+
 	JButton plus = new JButton("+");
 	JButton minus = new JButton("-");
 	JButton time = new JButton("x");
@@ -31,13 +31,13 @@ public class calculater extends JFrame {
 	JButton eight = new JButton("8");
 	JButton nine = new JButton("9");
 	JButton zero = new JButton("0");
-	
+
 	JButton sin = new JButton("sin");
 	JButton cos = new JButton("cos");
 	JButton tan = new JButton("tan");
 	JButton squr = new JButton("squr");
 
-	public static void main(String[] args) {//main method
+	public static void main(String[] args) {// main method
 
 		password passFrame = new password();
 		passFrame.setSize(400, 400);
@@ -51,7 +51,6 @@ public class calculater extends JFrame {
 
 		JPanel panel1 = new JPanel(new GridLayout(4, 4));
 
-		
 		panel1.add(one);
 		panel1.add(two);
 		panel1.add(three);
@@ -62,7 +61,7 @@ public class calculater extends JFrame {
 		panel1.add(eight);
 		panel1.add(nine);
 		panel1.add(zero);
-		panel1.add(plus);//add buttons to panel1
+		panel1.add(plus);// add buttons to panel1
 		panel1.add(minus);
 		panel1.add(time);
 		panel1.add(devide);
@@ -72,7 +71,7 @@ public class calculater extends JFrame {
 		panel1.add(tan);
 		panel1.add(squr);
 
-		plus.addActionListener(new ButtonListener());//register buttonListener
+		plus.addActionListener(new ButtonListener());// register buttonListener
 		minus.addActionListener(new ButtonListener());
 		time.addActionListener(new ButtonListener());
 		devide.addActionListener(new ButtonListener());
@@ -90,85 +89,87 @@ public class calculater extends JFrame {
 		eight.addActionListener(new ButtonListener());
 		nine.addActionListener(new ButtonListener());
 		zero.addActionListener(new ButtonListener());
-				
+
 		JPanel panel2 = new JPanel((new GridLayout(1, 0)));
-		panel2.add(screem, BorderLayout.EAST);//add text fields
-		
+		panel2.add(screem, BorderLayout.EAST);// add text fields
 
 		add(panel1, BorderLayout.SOUTH);
 		add(panel2, BorderLayout.CENTER);
 
 	}
 
-	class ButtonListener implements ActionListener {//event listener
+	class ButtonListener implements ActionListener {// event listener
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == plus) {
 				firstNum = Double.parseDouble(screem.getText());
 
 				statement = 1;
-				 
+
 				screem.setText("+");
-				
-				condition ++;
-				
-				
-				
+
+				condition++;
 
 			} else if (e.getSource() == minus) {
 				firstNum = Double.parseDouble(screem.getText());
 
 				statement = 2;
-				
+
 				screem.setText("-");
-				
-				condition ++;
-				
-				
+
+				condition++;
+
 			} else if (e.getSource() == time) {
 				firstNum = Double.parseDouble(screem.getText());
 
 				statement = 3;
-				
+
 				screem.setText("X");
-				
-				condition ++;
-				
-				
+
+				condition++;
+
 			} else if (e.getSource() == devide) {
 				firstNum = Double.parseDouble(screem.getText());
 
 				statement = 4;
-				
+
 				screem.setText("/");
-				
-				condition ++;
-				
-				
+
+				condition++;
+
 			} else if (e.getSource() == equal) {
-				if(statement == 1)
-				{
+				if (statement == 1) {
 					secondNum = Double.parseDouble(screem.getText());
 					result = firstNum + secondNum;
-				}
-				else if(statement == 2)
-				{
-					secondNum = Double.parseDouble(screem.getText());
-					result = firstNum - secondNum;
-				}
-				else if(statement == 3)
-				{
-					secondNum = Double.parseDouble(screem.getText());
-					result = firstNum * secondNum;
-				}
-				else if(statement == 4)
-				{
-					secondNum = Double.parseDouble(screem.getText());
-					result = firstNum / secondNum;
+				} else if (statement == 2) {
+					if (special == 0) {
+						secondNum = Double.parseDouble(screem.getText());
+						result = firstNum - secondNum;
+					} else {
+						firstNum = Double.parseDouble(screem.getText());
+						result = firstNum - secondNum;
+					}
+				} else if (statement == 3) {
+					if (special == 0) {
+						secondNum = Double.parseDouble(screem.getText());
+						result = firstNum * secondNum;
+					} else {
+						firstNum = Double.parseDouble(screem.getText());
+						result = firstNum * secondNum;
+					}
+				} else if (statement == 4) {
+					if (special == 0) {
+						secondNum = Double.parseDouble(screem.getText());
+						result = firstNum / secondNum;
+					} else {
+						firstNum = Double.parseDouble(screem.getText());
+						result = firstNum / secondNum;
+					}
 				}
 				screem.setText(String.valueOf(result));
 				condition = 0;
 				secondEnter = 0;
+				special++;
 			} else if (e.getSource() == sin) {
 				result = Math.sin(Math.toRadians(Double.parseDouble(screem
 						.getText())));
@@ -183,297 +184,206 @@ public class calculater extends JFrame {
 				result = Math.tan(Math.toRadians(Double.parseDouble(screem
 						.getText())));
 			}
-			
+
 			else if (e.getSource() == squr) {
-				result = Math.sqrt(Double.parseDouble(screem
-						.getText()));
-			}
-			else if (e.getSource() == one) {
-				if(firstNum == 0)
-				{
+				result = Math.sqrt(Double.parseDouble(screem.getText()));
+			} else if (e.getSource() == one) {
+				if (firstNum == 0) {
 					firstNum = 1;
 					screem.setText(String.valueOf(firstNum));
-				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 1;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 1;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 1;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == two) {
-				if(firstNum == 0)
-				{
-					firstNum = 2;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 1;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == two) {
+				if (firstNum == 0) {
+					firstNum = 2;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 2;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 2;
 					screem.setText(String.valueOf(temp));
-				}
-				else 
-				{
+				} else {
 					firstNum = Double.parseDouble(screem.getText()) * 10 + 2;
 					screem.setText(String.valueOf(firstNum));
 				}
-					
-			}
-			else if (e.getSource() == three) {
-				if(firstNum == 0)
-				{
+
+			} else if (e.getSource() == three) {
+				if (firstNum == 0) {
 					firstNum = 3;
 					screem.setText(String.valueOf(firstNum));
-				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 3;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 3;
 					screem.setText(String.valueOf(temp));
-				}
-				else 
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 3;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == four	) {
-				if(firstNum == 0)
-				{
-					firstNum = 4;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 3;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == four) {
+				if (firstNum == 0) {
+					firstNum = 4;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 4;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 4;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 4 ;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == five) {
-				if(firstNum == 0)
-				{
-					firstNum = 5;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 4;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == five) {
+				if (firstNum == 0) {
+					firstNum = 5;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 5;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 5;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 5;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == six) {
-				if(firstNum == 0)
-				{
-					firstNum = 6;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 5;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == six) {
+				if (firstNum == 0) {
+					firstNum = 6;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 6;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 6;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 6;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == seven) {
-				if(firstNum == 0)
-				{
-					firstNum = 7;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 6;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == seven) {
+				if (firstNum == 0) {
+					firstNum = 7;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 7;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 7;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 7;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == eight) {
-				if(firstNum == 0)
-				{
-					firstNum = 8;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 7;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == eight) {
+				if (firstNum == 0) {
+					firstNum = 8;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 8;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 8;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 8;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == nine) {
-				if(firstNum == 0)
-				{
-					firstNum = 9;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 8;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == nine) {
+				if (firstNum == 0) {
+					firstNum = 9;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 9;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-				}
-				else if(secondEnter > 0)
-				{
+					secondEnter++;
+
+				} else if (secondEnter > 0) {
 					temp = Double.parseDouble(screem.getText()) * 10 + 9;
 					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText()) * 10 + 9;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
-			else if (e.getSource() == zero) {
-				if(firstNum == 0)
-				{
-					firstNum = 0;
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10 + 9;
 					screem.setText(String.valueOf(firstNum));
 				}
-				else if(condition > 0 && secondEnter == 0)
-				{
+
+			} else if (e.getSource() == zero) {
+				if (firstNum == 0) {
+					firstNum = 0;
+					screem.setText(String.valueOf(firstNum));
+				} else if (condition > 0 && secondEnter == 0) {
 					screem.setText("");
 					temp = 0;
 					screem.setText(String.valueOf(temp));
-					secondEnter ++;
-					
-				}
-				else if(secondEnter > 0)
-				{
-					temp = Double.parseDouble(screem.getText()) * 10 ;
-					screem.setText(String.valueOf(temp));
-				}
-				else
-				{
-				firstNum = Double.parseDouble(screem.getText())  * 10;
-				screem.setText(String.valueOf(firstNum));
-				}
-				
-			}
+					secondEnter++;
 
+				} else if (secondEnter > 0) {
+					temp = Double.parseDouble(screem.getText()) * 10;
+					screem.setText(String.valueOf(temp));
+				} else {
+					firstNum = Double.parseDouble(screem.getText()) * 10;
+					screem.setText(String.valueOf(firstNum));
+				}
+
+			}
 
 		}
 	}
 
 }
 
-class password extends JFrame {//class about the password frame
+class password extends JFrame {// class about the password frame
 
 	JPasswordField passField = new JPasswordField(4);
 	JButton enter = new JButton("Enter");
 
 	char[] passCorrect = { '0', '0', '0', '0' };
 
-	
-
 	password() {
 
-		JPanel passPanel = new JPanel(new GridLayout(2,1 ));
+		JPanel passPanel = new JPanel(new GridLayout(2, 1));
 
 		passPanel.add(passField);
 		passPanel.add(enter);
@@ -484,7 +394,7 @@ class password extends JFrame {//class about the password frame
 
 	}
 
-	void judgePass() {//judge the password
+	void judgePass() {// judge the password
 		char[] pass = passField.getPassword();
 		if (Arrays.equals(passCorrect, pass)) {
 
@@ -504,7 +414,7 @@ class password extends JFrame {//class about the password frame
 		}
 	}
 
-	class ButtonListener implements ActionListener {//event listener
+	class ButtonListener implements ActionListener {// event listener
 
 		public void actionPerformed(ActionEvent e) {
 
