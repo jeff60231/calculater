@@ -1,3 +1,5 @@
+package test;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -139,8 +141,14 @@ public class calculater extends JFrame {
 
 			} else if (e.getSource() == equal) {
 				if (statement == 1) {
-					secondNum = Double.parseDouble(screem.getText());
-					result = firstNum + secondNum;
+					if (special == 0) {
+						secondNum = Double.parseDouble(screem.getText());
+						result = firstNum + secondNum;
+
+					} else {
+						firstNum = Double.parseDouble(screem.getText());
+						result = firstNum + secondNum;
+					}
 				} else if (statement == 2) {
 					if (special == 0) {
 						secondNum = Double.parseDouble(screem.getText());
